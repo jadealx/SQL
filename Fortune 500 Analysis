@@ -68,7 +68,7 @@ AND revenue>=1000000000;
 ;
 
 # In this example, I used a CASE statement to group Fortune 500 companies based on the number of paid time off days. This query categorizes companies into three groups. “Low PTO, Medium PTO, and High PTO”
-SELECT company_name, employees,paid_time_off_days
+SELECT company_name, employees, paid_time_off_days
 ,CASE WHEN paid_time_off_days <=10 THEN 'Low PTO'
 WHEN paid_time_off_days BETWEEN 11 AND 20 THEN 'Medium PTO'
 ELSE 'High PTO'

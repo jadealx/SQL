@@ -42,3 +42,9 @@ SELECT SUM(price), category 'Kitchen Supplies'
 FROM superstore 
 WHERE category = 'Kitchen Supplies'
 GROUP BY category;
+
+OR
+
+SELECT MAX(price), category
+FROM superstore
+WHERE category = 'Kitchen Supplies’;

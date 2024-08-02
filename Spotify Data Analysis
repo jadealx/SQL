@@ -1,0 +1,76 @@
+-- In this analysis, I explored a dataset of Spotify tracks to uncover insights about various musical attributes. The dataset includes information on track names, artists, popularity, and several audio features such as danceability, energy, and tempo.
+
+    -- The analysis involved:
+        Identifying the most popular tracks and comparing their attributes.
+        Exploring patterns in danceability and energy levels across different tracks.
+        Categorizing tracks based on their loudness and tempo to understand their distribution.
+        Finally, comparing tracks with high and low popularity to identify distinctive features.
+        
+
+#Creating the table: 
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+
+-- #1 Find tracks by a specific artist
+
+SELECT track_name, artist_name, popularity
+FROM BIT_DB.Spotifydata
+WHERE artist_name LIKE '%Justin Bieber%';
+
+-- #2 Find the average tempo of tracks by song mode
+
+SELECT song_mode, AVG(tempo) AS avg_tempo
+FROM BIT_DB.Spotifydata
+GROUP BY song_mode
+ORDER BY avg_tempo DESC;
+
+-- #3 Find tracks where the loudness is higher than a specified value and the track name contains a certain keyword.
+
+SELECT track_name, artist_name, loudness
+FROM BIT_DB.Spotifydata
+WHERE loudness > -5.0 AND track_name LIKE '%baby%';
+
+--#4 List out the most popular tracks for each artist.
+
+SELECT artist_name, track_name, MAX(popularity) AS max_popularity
+FROM BIT_DB.Spotifydata
+GROUP BY artist_name, track_name
+ORDER BY artist_name, max_popularity DESC;
+
+-- $5 Find tracks with the highest and lowest loudness, and categorize them.
+
+SELECT track_name, artist_name, loudness
+, CASE WHEN loudness > -3 THEN 'Very Loud'
+WHEN loudness > -6 THEN 'Loud'
+WHEN loudness > -9 THEN 'Moderate'
+ELSE 'Quiet'
+END AS loudness_category
+FROM BIT_DB.Spotifydata
+ORDER BY loudness DESC
+LIMIT 10;
+
+
+--#6 Identify tracks with a tempo that is significantly higher than the average tempo of all tracks.
+
+SELECT track_name, artist_name, tempo
+FROM BIT_DB.Spotifydata
+WHERE tempo > (SELECT AVG(tempo) FROM BIT_DB.Spotifydata);

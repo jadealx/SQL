@@ -31,3 +31,17 @@ Queried a customer and order database to quantify statistics about customer and 
 - Revenue trends and patterns.
 - Identifying top customers and products.
 **Skills:** SQL queries, JOINs, GROUP BY, HAVING, and data analysis.
+
+### Fortune 500 Companies Analysis
+Utilized SQL to analyze a Fortune 500 dataset, focusing on:
+- Retrieving company names and revenue for companies in the Technology or Healthcare industries with revenue greater than $1 billion.
+- Categorizing companies based on paid time off days using a CASE statement.
+- Identifying industries with at least 15 paid time off days.
+**Skills:** SQL queries, CASE statements, GROUP BY, HAVING, and filtering.
+
+### Superstore Sales Analysis
+Performed SQL queries on the Superstore database to analyze item information and pricing, including:
+- Ordering items by price.
+- Calculating the average price of items.
+- Summarizing and analyzing item prices within the "Kitchen Supplies" category.
+**Skills:** SQL queries, aggregate functions, ORDER BY, and data analysis.

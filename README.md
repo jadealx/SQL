@@ -63,3 +63,27 @@ Performed SQL queries on the Superstore database to analyze item information and
 ### Impact
 - **Enhanced Understanding:** Provided valuable insights into customer satisfaction and feedback trends, aiding in informed business decisions.
 - **Improved Engagement:** Identified feedback patterns to improve customer experience and address common issues.
+
+# Investment Analysis Project
+
+## Overview
+- Conducted an in-depth analysis of investment data across multiple portfolios.
+- Utilized advanced SQL techniques including JOINs, CTEs, and aggregate functions.
+
+### Key Insights
+1. **Average Investment Value by Portfolio:**
+   - Calculated the average value of investments within each portfolio as of the most recent performance date.
+2. **Total Investment Value by Investor:**
+   - Aggregated the total value of investments per investor, providing insights into individual investment behaviors.
+3. **Investments with High Returns:**
+   - Identified investments yielding returns greater than 10% as of the latest performance date.
+
+### SQL Techniques Used
+- **JOINS:** Linked data across `Investors`, `Portfolios`, `Investments`, and `Performance` tables.
+- **Common Table Expressions (CTEs):** Simplified complex queries by breaking them down into manageable parts.
+- **Subqueries:** Used subqueries to retrieve specific data points, such as the latest performance date for each investment.
+- **Aggregate Functions:** Employed functions like `AVG` and `SUM` to calculate average and total values.
+- **Filtering with LIKE and Wildcards (%):** Applied pattern matching to filter and analyze specific data entries.
+
+### Business Application
+- This analysis provides valuable insights for investment managers to understand portfolio performance, identify high-performing investments, and evaluate investor behaviors. These insights can inform strategic investment decisions, optimize portfolio management, and enhance investor relations.

@@ -2,7 +2,7 @@
 
 --How many orders were placed in January?
 
-SELECT COUNT(orderID)
+SELECT COUNT(orderID) 
 FROM BIT_DB.JanSales;
 
 --How many of those were IPhones?

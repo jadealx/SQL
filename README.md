@@ -45,3 +45,21 @@ Performed SQL queries on the Superstore database to analyze item information and
 - Calculating the average price of items.
 - Summarizing and analyzing item prices within the "Kitchen Supplies" category.
 **Skills:** SQL queries, aggregate functions, ORDER BY, and data analysis.
+
+## Customer Feedback Analysis
+
+### Key Tasks and Techniques
+- **Data Integration:** Used SQL to join customer and feedback data, providing a complete view of customer feedback.
+- **Feedback Insights:** Implemented queries to calculate average ratings and count feedback entries for each rating level.
+- **CTE Utilization:** Employed Common Table Expressions (CTEs) to simplify and streamline complex queries for better readability and performance.
+- **Aggregation and Analysis:** Aggregated feedback data to identify common trends and understand overall customer satisfaction.
+
+### Skills Used
+- **SQL Queries:** Proficient use of SQL joins (INNER JOIN, LEFT JOIN) and aggregate functions (AVG, COUNT).
+- **Common Table Expressions (CTEs):** Effective use of CTEs to manage and organize complex query logic.
+- **Data Analysis:** Analyzed customer feedback to extract meaningful insights and trends.
+- **Data Visualization (Optional):** Optionally included visualizations to represent feedback trends and ratings distribution.
+
+### Impact
+- **Enhanced Understanding:** Provided valuable insights into customer satisfaction and feedback trends, aiding in informed business decisions.
+- **Improved Engagement:** Identified feedback patterns to improve customer experience and address common issues.

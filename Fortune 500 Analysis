@@ -1,4 +1,4 @@
-#This analysis utilized the following Fortune 500 dataset:
+#This analysis utilized the following Fortune 500 dataset to uncover key insights about the top companies over the years:
 
 CREATE TABLE fortune_companies (
     company_id INTEGER PRIMARY KEY,

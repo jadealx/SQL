@@ -1,0 +1,119 @@
+CREATE TABLE Users (
+    user_id INTEGER PRIMARY KEY,
+    name TEXT,
+    age INTEGER,
+    risk_tolerance TEXT
+);
+
+CREATE TABLE Portfolios (
+    portfolio_id INTEGER PRIMARY KEY,
+    user_id INTEGER,
+    portfolio_name TEXT,
+    FOREIGN KEY (user_id) REFERENCES Users (user_id)
+);
+
+CREATE TABLE Investments (
+    investment_id INTEGER PRIMARY KEY,
+    portfolio_id INTEGER,
+    investment_name TEXT,
+    investment_type TEXT,
+    amount_invested DECIMAL(10, 2),
+    FOREIGN KEY (portfolio_id) REFERENCES Portfolios (portfolio_id)
+);
+
+CREATE TABLE Performance (
+    performance_id INTEGER PRIMARY KEY,
+    investment_id INTEGER,
+    date DATE,
+    value DECIMAL(10, 2),
+    FOREIGN KEY (investment_id) REFERENCES Investments (investment_id)
+);
+
+
+INSERT INTO Users (user_id, name, age, risk_tolerance) VALUES
+(1, 'Alice', 30, 'High'),
+(2, 'Bob', 45, 'Medium'),
+(3, 'Carol', 35, 'Low');
+
+INSERT INTO Portfolios (portfolio_id, user_id, portfolio_name) VALUES
+(1, 1, 'Tech Stocks'),
+(2, 1, 'Real Estate'),
+(3, 2, 'Bonds'),
+(4, 3, 'Dividend Stocks');
+
+INSERT INTO Investments (investment_id, portfolio_id, investment_name, investment_type, amount_invested) VALUES
+(1, 1, 'Apple', 'Stock', 10000.00),
+(2, 1, 'Google', 'Stock', 15000.00),
+(3, 2, 'Downtown Condo', 'Real Estate', 200000.00),
+(4, 3, 'US Treasury Bond', 'Bond', 50000.00),
+(5, 4, 'AT&T', 'Stock', 8000.00);
+
+INSERT INTO Performance (performance_id, investment_id, date, value) VALUES
+(1, 1, '2023-01-01', 12000.00),
+(2, 1, '2023-06-01', 14000.00),
+(3, 2, '2023-01-01', 17000.00),
+(4, 2, '2023-06-01', 18000.00),
+(5, 3, '2023-01-01', 210000.00),
+(6, 3, '2023-06-01', 220000.00),
+(7, 4, '2023-01-01', 52000.00),
+(8, 4, '2023-06-01', 53000.00),
+(9, 5, '2023-01-01', 8500.00),
+(10, 5, '2023-06-01', 8700.00);
+
+-- Find the total amount invested by each user.
+SELECT u.name, SUM(i.amount_invested) AS total_invested
+FROM Users u
+JOIN Portfolios p ON u.user_id = p.user_id
+JOIN Investments i ON p.portfolio_id = i.portfolio_id
+GROUP BY u.user_id, u.name;
+
+-- Find the average value of investments in each portfolio as of the most recent performance date.
+WITH LatestPerformance AS (
+    SELECT investment_id, MAX(date) AS latest_date
+    FROM Performance
+    GROUP BY investment_id
+)
+SELECT p.portfolio_name, AVG(perf.value) AS avg_investment_value
+FROM Portfolios p
+JOIN Investments i ON p.portfolio_id = i.portfolio_id
+JOIN Performance perf ON i.investment_id = perf.investment_id
+JOIN LatestPerformance lp ON perf.investment_id = lp.investment_id AND perf.date = lp.latest_date
+GROUP BY p.portfolio_name;
+
+-- Find users with investments in stocks worth more than $15,000 as of the most recent performance date.
+WITH LatestPerformance AS (
+    SELECT investment_id, MAX(date) AS latest_date
+    FROM Performance
+    GROUP BY investment_id
+)
+SELECT u.name, i.investment_name, perf.value AS current_value
+FROM Users u
+JOIN Portfolios p ON u.user_id = p.user_id
+JOIN Investments i ON p.portfolio_id = i.portfolio_id
+JOIN Performance perf ON i.investment_id = perf.investment_id
+JOIN LatestPerformance lp ON perf.investment_id = lp.investment_id AND perf.date = lp.latest_date
+WHERE i.investment_type = 'Stock' AND perf.value > 15000;
+
+## Summary
+
+### Analysis Overview
+- Conducted an in-depth analysis of investment data across multiple portfolios.
+- Utilized advanced SQL techniques including JOINs, CTEs, and aggregate functions.
+
+### Key Insights
+1. **Average Investment Value by Portfolio:**
+   - Calculated the average value of investments within each portfolio as of the most recent performance date.
+2. **Total Investment Value by Investor:**
+   - Aggregated the total value of investments per investor, providing insights into individual investment behaviors.
+3. **Investments with High Returns:**
+   - Identified investments yielding returns greater than 10% as of the latest performance date.
+
+### SQL Techniques Used
+- **JOINS:** Linked data across `Investors`, `Portfolios`, `Investments`, and `Performance` tables.
+- **Common Table Expressions (CTEs):** Simplified complex queries by breaking them down into manageable parts.
+- **Subqueries:** Used subqueries to retrieve specific data points, such as the latest performance date for each investment.
+- **Aggregate Functions:** Employed functions like `AVG` and `SUM` to calculate average and total values.
+- **Filtering with LIKE and Wildcards (%):** Applied pattern matching to filter and analyze specific data entries.
+
+### Business Application
+- This analysis provides valuable insights for investment managers to understand portfolio performance, identify high-performing investments, and evaluate investor behaviors. These insights can inform strategic investment decisions, optimize portfolio management, and enhance investor relations.

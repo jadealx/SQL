@@ -87,3 +87,25 @@ Performed SQL queries on the Superstore database to analyze item information and
 
 ### Business Application
 - This analysis provides valuable insights for investment managers to understand portfolio performance, identify high-performing investments, and evaluate investor behaviors. These insights can inform strategic investment decisions, optimize portfolio management, and enhance investor relations.
+
+# Grocery Store Rewards Program Analysis
+
+## Overview
+
+-- This project analyzes a grocery store's rewards program using SQL to assess its effectiveness and identify areas for improvement. The analysis examines customer engagement, spending patterns, and the effectiveness of various rewards.
+
+## Analysis Includes
+
+- **Points Distribution**: Counts the number of distinct customers who have earned points.
+- **Customer Spending Analysis**: Identifies customers who spent more than $100 in a single transaction and earned points.
+- **Most Redeemed Rewards**: Analyzes which rewards are redeemed most frequently.
+- **Average Points Per Transaction**: Calculates the average points earned per transaction for customers spending over $50.
+- **Spending Level Points Adjustment**: Categorizes transactions into spending levels and examines how points are distributed.
+
+## How This Analysis Can Help Businesses
+
+This analysis offers insights into customer engagement and spending behavior, helping businesses understand how effectively their rewards program is utilized. By identifying trends and areas for improvement, businesses can optimize their rewards offerings to better meet customer needs and enhance overall program effectiveness.
+
+## File
+
+- **Grocery_Store_Rewards_Program_Analysis.sql**: Contains the SQL schema and queries used for the analysis.

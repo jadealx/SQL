@@ -7,7 +7,10 @@
 -- Updated Schema as of August 18, 2024
     
 -- This schema has been revised to include new tables (Products, Promotions, Sales) and additional columns in existing tables (Customers, Transactions) for a more comprehensive rewards program analysis.
-CREATE TABLE Customers (
+
+ -- Updated on 2024-08-29: Added a window function to the Reward Redemption Impact analysis for more advanced data insights
+    
+ CREATE TABLE Customers (
     customer_id INTEGER PRIMARY KEY,
     first_name TEXT,
     last_name TEXT,
@@ -159,12 +162,12 @@ GROUP BY r.reward_name
 ORDER BY times_redeemed DESC;
 
 -- Average Points Per Transaction
--- What is the average number of points earned per transaction for customers who spent more than $50?
-SELECT AVG(pe.points_earned) AS avg_points
+-- Identify top 3 customers by total points earned
+SELECT customer_id, AVG(points_earned) OVER (PARTITION BY customer_id) AS avg_points_per_customer
 FROM Points_Earnings pe
 JOIN Transactions t ON pe.transaction_id = t.transaction_id
 WHERE t.amount > 50;
-
+    
 -- How are points adjusted based on spending levels?
 SELECT c.first_name, c.last_name, t.amount,
        CASE 

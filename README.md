@@ -92,7 +92,7 @@ Performed SQL queries on the Superstore database to analyze item information and
 
 ## Overview
 
--- This project analyzes a grocery store's rewards program using SQL to assess its effectiveness and identify areas for improvement. The analysis examines customer engagement, spending patterns, and the effectiveness of various rewards.
+This project analyzes a grocery store's rewards program using SQL to assess its effectiveness and identify areas for improvement. The analysis examines customer engagement, spending patterns, and the effectiveness of various rewards.
 
 ## Analysis Includes
 
@@ -101,6 +101,27 @@ Performed SQL queries on the Superstore database to analyze item information and
 - **Most Redeemed Rewards**: Analyzes which rewards are redeemed most frequently.
 - **Average Points Per Transaction**: Calculates the average points earned per transaction for customers spending over $50.
 - **Spending Level Points Adjustment**: Categorizes transactions into spending levels and examines how points are distributed.
+- **Promotion Effectiveness**: Assesses the impact of promotions and rewards on sales.
+- **Product Performance**: Evaluates which products are associated with high-value transactions.
+
+## Skills Used
+
+- **SQL**:
+  - **Joins**: Utilized INNER JOIN, LEFT JOIN, and other types to combine data from multiple tables and derive insights.
+  - **Aggregation Functions**: Used COUNT, SUM, and AVG to summarize data and extract meaningful metrics.
+  - **Grouping**: Employed GROUP BY to aggregate data on specific categories such as customers, rewards, and products.
+  - **Conditional Logic**: Implemented CASE statements to classify spending levels and adjust points distribution based on transaction amounts.
+  - **Window Functions**: Added a window function for advanced data insights, allowing for sophisticated comparisons and analysis.
+  - **Subqueries**: Incorporated subqueries to filter and refine results, ensuring accuracy in the analysis.
+
+- **Database Design**:
+  - **Schema Creation**: Designed a relational database schema with tables such as Customers, Transactions, Rewards, Products, etc.
+  - **Foreign Key Constraints**: Established relationships between tables to ensure data integrity.
+
+- **Data Analysis**:
+  - **Customer Behavior Analysis**: Analyzed spending patterns and reward redemption rates.
+  - **Promotion Effectiveness**: Evaluated the impact of promotions on sales.
+  - **Product Performance**: Identified top-performing products based on transaction value.
 
 ## How This Analysis Can Help Businesses
 

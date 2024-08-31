@@ -113,6 +113,7 @@ INSERT INTO Feedback (CustomerID, ProductID, Rating, Comment, FeedbackDate) VALU
 -- Question 1: Analyze how new product launches influence both sales and customer feedback.
 
 -- Step 1: Analyze sales trends based on product launch dates.
+
 SELECT 
     p.ProductName,
     p.LaunchDate,
@@ -126,6 +127,7 @@ GROUP BY
     p.ProductName, p.LaunchDate;
 
 -- Step 2: Analyze customer feedback trends based on product launch dates.
+
 SELECT 
     p.ProductName,
     p.LaunchDate,
@@ -139,6 +141,7 @@ GROUP BY
     p.ProductName, p.LaunchDate;
 
 -- Step 3: Combine sales and feedback analysis to understand the impact of product launches.
+
 SELECT 
     s.ProductName,
     s.LaunchDate,
@@ -178,6 +181,7 @@ ORDER BY
 -- Question 2: Analyze the effectiveness of promotions in driving sales and their correlation with customer satisfaction.
 
 -- Step 1: Analyze total sales and average ratings during promotion periods.
+
 SELECT 
     p.PromotionName,
     p.StartDate,
@@ -194,7 +198,9 @@ GROUP BY
     p.PromotionName, p.StartDate, p.EndDate;
 
 -- Step 2: Calculate the correlation between total sales and average feedback rating manually.
+
 -- Calculate required statistics for correlation formula
+
 SELECT 
     SUM(s.TotalAmount) AS SumSales,
     COUNT(s.SaleID) AS CountSales,
@@ -211,6 +217,7 @@ LEFT JOIN
     Feedback f ON s.ProductID = f.ProductID;
 
 -- Step 3: Use the collected statistics to calculate the correlation coefficient
+
 -- Formula: r = (n * ΣXY - ΣX * ΣY) / SQRT((n * ΣX^2 - (ΣX)^2) * (n * ΣY^2 - (ΣY)^2))
 
 SELECT 
@@ -229,6 +236,7 @@ LEFT JOIN
 -- Question 3: Analyze insights from customer reviews and ratings, and their impact on sales trends.
 
 -- Step 1: Analyze average ratings and total sales by product.
+
 SELECT 
     p.ProductName,
     AVG(f.Rating) AS AverageRating,
@@ -243,6 +251,7 @@ GROUP BY
     p.ProductName;
 
 -- Step 2: Use window functions to rank products based on their average ratings and total sales.
+
 WITH ProductRatings AS (
     SELECT 
         p.ProductName,
@@ -277,6 +286,7 @@ FROM
     RankedProducts;
 
 -- Step 3: Analyze trends by comparing average rating and total sales over time.
+
 WITH MonthlySales AS (
     SELECT 
         p.ProductName,
@@ -312,3 +322,20 @@ JOIN
     MonthlyRatings r ON s.ProductName = r.ProductName AND s.Month = r.Month
 ORDER BY 
     s.ProductName, s.Month;
+
+## Solution and Recommendations
+
+### Product Launch Strategy Optimization
+-- **Recommendation:** Utilize insights from the product launch impact analysis to refine future product launches. Focus on high-performing product categories and align launches with peak sales periods. Analyze customer feedback to identify features or improvements that could drive higher satisfaction and sales.
+
+### Promotional Effectiveness Enhancement
+-- **Recommendation:** Leverage findings on promotional effectiveness to design more targeted and impactful promotions. Run A/B tests to experiment with different promotion strategies and identify which types of promotions resonate most with customers. Implement promotions during key sales periods to maximize their impact.
+
+### Customer Feedback Integration
+-- **Recommendation:** Incorporate customer feedback into product development and marketing strategies. Address common concerns and improve product quality based on feedback. Personalize marketing campaigns based on feedback trends to enhance customer engagement and satisfaction.
+
+### Data-Driven Decision Making
+-- **Recommendation:** Continuously monitor and analyze sales and feedback data for informed decision-making. Establish a regular review process to assess product launches and promotions performance. Adjust strategies in real-time to remain responsive to customer needs.
+
+### Visualization and Reporting Improvements
+-- **Recommendation:** Enhance reporting and visualization tools to present sales and feedback data more effectively. Develop interactive dashboards for intuitive data exploration. Highlight key metrics and findings to facilitate easy interpretation.

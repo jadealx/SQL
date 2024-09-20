@@ -1,0 +1,135 @@
+-- Create Customers Table
+CREATE TABLE customers (
+    customer_id SERIAL PRIMARY KEY,
+    name VARCHAR(50),
+    email VARCHAR(50),
+    age INT,
+    gender CHAR(1),
+    city VARCHAR(50),
+    loyalty_program BOOLEAN
+);
+
+-- Create Products Table
+CREATE TABLE products (
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(100),
+    category VARCHAR(50),
+    price DECIMAL(10, 2)
+);
+
+-- Create Transactions Table
+CREATE TABLE transactions (
+    transaction_id SERIAL PRIMARY KEY,
+    customer_id INT REFERENCES customers(customer_id),
+    product_id INT REFERENCES products(product_id),
+    transaction_date DATE,
+    quantity INT,
+    total_amount DECIMAL(10, 2)
+);
+
+-- Create Stores Table
+CREATE TABLE stores (
+    store_id SERIAL PRIMARY KEY,
+    store_location VARCHAR(100),
+    region VARCHAR(50),
+    store_revenue DECIMAL(12, 2)
+);
+
+-- Insert into Customers
+INSERT INTO customers (name, email, age, gender, city, loyalty_program) 
+VALUES 
+('John Doe', 'john.doe@email.com', 28, 'M', 'Toronto', TRUE),
+('Jane Smith', 'jane.smith@email.com', 35, 'F', 'Vancouver', TRUE),
+('Mark Lee', 'mark.lee@email.com', 22, 'M', 'Calgary', FALSE),
+('Sarah Johnson', 'sarah.j@email.com', 30, 'F', 'Toronto', TRUE),
+('Emily Davis', 'emily.davis@email.com', 40, 'F', 'Ottawa', FALSE);
+
+-- Insert into Products
+INSERT INTO products (product_name, category, price) 
+VALUES 
+('Laptop', 'Electronics', 999.99),
+('Sneakers', 'Footwear', 79.99),
+('T-shirt', 'Clothing', 19.99),
+('Smartphone', 'Electronics', 699.99),
+('Coffee Machine', 'Appliances', 49.99);
+
+-- Insert into Transactions
+INSERT INTO transactions (customer_id, product_id, transaction_date, quantity, total_amount)
+VALUES
+(1, 1, '2024-09-01', 1, 999.99),
+(2, 3, '2024-09-02', 2, 39.98),
+(3, 2, '2024-09-05', 1, 79.99),
+(4, 4, '2024-09-07', 1, 699.99),
+(5, 5, '2024-09-09', 3, 149.97);
+
+-- Insert into Stores
+INSERT INTO stores (store_location, region, store_revenue) 
+VALUES
+('Toronto Store', 'Ontario', 200000.00),
+('Vancouver Store', 'British Columbia', 150000.00),
+('Calgary Store', 'Alberta', 180000.00),
+('Ottawa Store', 'Ontario', 120000.00);
+
+-- Focus is on customer segmentation and sales analysis for a retail business
+
+-- The goal is to analyze customer purchase behaviour, sales performance, and propose actionable recommendations based on the data.
+
+-- I ran the following query to find the most popular products
+
+SELECT 
+    p.product_name,
+    SUM(t.quantity) AS total_sold
+FROM 
+    products p
+JOIN 
+    transactions t ON p.product_id = t.product_id
+GROUP BY 
+    p.product_name
+ORDER BY 
+    total_sold DESC;
+
+-- The results showed that Coffee Machine were a high demand product, marking 3 as total sold. T shirt comes in at 2 in total being sold, followed by smartphone, laptop, and sneakers all only having 1 sold each.
+
+-- I then wanted to find out, why were coffee machines being sold more than the other products?
+
+-- So I then ran the following query to see a price comparison of the products
+
+SELECT 
+    p.product_name,
+    p.price
+FROM 
+    products p
+WHERE 
+    p.product_name IN ('Coffee Machine', 'Laptop', 'Smartphone', 'Sneakers', 'T-shirt');
+
+-- This revealed to me the following
+
+-- Coffee Machine ($49.99): This is significantly lower than the other products. Its affordability may contribute to its higher sales volume, appealing to a broader audience.
+-- Smartphone ($699.99) and Laptop ($999.99): These higher-priced items might attract a different, more budget-conscious demographic, especially in comparison to the coffee machine.
+-- T-Shirt ($19.99) and Sneakers ($79.99): These prices suggest a more casual purchase mindset, likely with less commitment than electronics.
+
+-- Market Positioning:
+-- The coffee machine being the most affordable option could explain its higher sales, especially if customers are looking for value. In contrast, more expensive items may require more consideration before purchase.
+
+-- Customer Lifetime Value (CLV) Analysis: To better understand potential long-term revenue, I calculated the average number of purchases, the average amount spent per customer, and the estimated CLV
+
+SELECT 
+    AVG(t.quantity) AS avg_purchases_per_customer,
+    AVG(t.total_amount) AS avg_spent_per_customer,
+    AVG(t.total_amount) * 3 AS estimated_clv
+FROM 
+    transactions t;
+
+-- Average Purchases per Customer: 1.0
+-- Average Amount Spent per Customer: $393.98
+-- Estimated CLV: $1,181.95
+
+-- This analysis provides insights into each customer’s potential value over time, allowing for more strategic decisions on marketing and promotions.
+
+-- Reommendations
+--  If the coffee machine is selling well due to its price, consider promoting it more heavily. Marketing efforts could highlight affordability and value by offering a limited-time discount or bundling it with related products (like mugs or coffee beans). Additionally, promotions during holidays or back-to-school seasons could appeal to college students, teachers, or remote workers.
+
+-- Measuring Success
+-- Surveys and Reviews: After the promotion, send surveys to customers who purchased the coffee machine or the bundle, asking if the promotion influenced their decision.
+-- Repeat Purchases: Track any increase in repeat purchases from customers who participated in the promotion to assess satisfaction and brand loyalty.
+-- Return on Investment (ROI): Calculate the promotion's cost against the revenue generated to determine financial viability.

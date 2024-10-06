@@ -1,7 +1,7 @@
 <!-- As of October 6th, 2024, this project has been updated with key findings and recommendations. -->
 
 CREATE TABLE Customers (
-    CustomerID INT PRIMARY KEY AUTO_INCREMENT,
+    CustomerID INT PRIMARY KEY AUTO_INCREMENT, 
     FirstName VARCHAR(50),
     LastName VARCHAR(50),
     Gender VARCHAR(10)

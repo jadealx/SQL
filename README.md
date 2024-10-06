@@ -64,7 +64,7 @@ Performed SQL queries on the Superstore database to analyze item information and
 - **Enhanced Understanding:** Provided valuable insights into customer satisfaction and feedback trends, aiding in informed business decisions.
 - **Improved Engagement:** Identified feedback patterns to improve customer experience and address common issues.
 
-# Investment Analysis Project
+# Investment Analysis 
 
 ## Overview
 This project focuses on analyzing investment data across multiple portfolios to assess overall performance and identify trends in user demographics. I revamped this analysis to fine-tune my SQL skills and deepen my understanding of investment behavior.

@@ -103,17 +103,14 @@ This analysis offers valuable insights for investment managers, allowing them to
 
 ## Overview
 
-This project analyzes a grocery store's rewards program using SQL to assess its effectiveness and identify areas for improvement. The analysis examines customer engagement, spending patterns, and the effectiveness of various rewards.
+This project analyzes a grocery store's rewards program using SQL to assess customer engagement, spending patterns, and the overall effectiveness of the rewards system. The analysis aims to identify key opportunities for optimizing the program to enhance customer satisfaction and profitability by examining how customers are earning and redeeming points, as well as which products and promotions are driving value.
 
 ## Analysis Includes
 
-- **Points Distribution**: Counts the number of distinct customers who have earned points.
-- **Customer Spending Analysis**: Identifies customers who spent more than $100 in a single transaction and earned points.
-- **Most Redeemed Rewards**: Analyzes which rewards are redeemed most frequently.
-- **Average Points Per Transaction**: Calculates the average points earned per transaction for customers spending over $50.
-- **Spending Level Points Adjustment**: Categorizes transactions into spending levels and examines how points are distributed.
-- **Promotion Effectiveness**: Assesses the impact of promotions and rewards on sales.
-- **Product Performance**: Evaluates which products are associated with high-value transactions.
+- **Customer Spending Behavior**: Analyzes customer spending patterns to understand how they influence reward redemption.
+- **Reward Redemption Analysis**: Evaluates the number of customers engaging with the rewards program and their corresponding spending.
+- **Rewards Performance**: Investigates which rewards are associated with the highest spending and the frequency of their redemption.
+- **Customer Engagement Metrics**: Assesses overall customer engagement with the rewards program based on spending thresholds and reward usage.
 
 ## Skills Used
 
@@ -122,7 +119,6 @@ This project analyzes a grocery store's rewards program using SQL to assess its 
   - **Aggregation Functions**: Used COUNT, SUM, and AVG to summarize data and extract meaningful metrics.
   - **Grouping**: Employed GROUP BY to aggregate data on specific categories such as customers, rewards, and products.
   - **Conditional Logic**: Implemented CASE statements to classify spending levels and adjust points distribution based on transaction amounts.
-  - **Window Functions**: Added a window function for advanced data insights, allowing for sophisticated comparisons and analysis.
   - **Subqueries**: Incorporated subqueries to filter and refine results, ensuring accuracy in the analysis.
 
 - **Database Design**:
@@ -136,8 +132,7 @@ This project analyzes a grocery store's rewards program using SQL to assess its 
 
 ## How This Analysis Can Help Businesses
 
-This analysis offers insights into customer engagement and spending behavior, helping businesses understand how effectively their rewards program is utilized. By identifying trends and areas for improvement, businesses can optimize their rewards offerings to better meet customer needs and enhance overall program effectiveness.
-
+This analysis provides valuable insights into customer engagement and spending behavior, helping businesses understand the effectiveness of their rewards program. By identifying trends and areas for improvement, businesses can optimize their rewards offerings to better meet customer needs and enhance overall program effectiveness.
 
 # Retail Product Launch and Promotion Effectiveness Analysis
 

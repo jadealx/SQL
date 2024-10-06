@@ -1,4 +1,4 @@
-    ##This analysis utilizes SQL to evaluate and summarize customer feedback data. The dataset includes feedback entries from customers, capturing their ratings and comments. 
+<!-- As of October 6th, 2024, this project has been updated with key findings and recommendations. -->
 
 CREATE TABLE Customers (
     customer_id INTEGER PRIMARY KEY,
@@ -25,60 +25,56 @@ INSERT INTO Feedback (feedback_id, customer_id, feedback_date, rating, comments)
 (2, 1002, '2023-06-02', 4, 'Very good, but could improve.'),
 (3, 1003, '2023-06-03', 2, 'Not satisfied with the product quality.');
 
--- What feedback did each customer provide, along with their first and last names?
-SELECT c.first_name, c.last_name, f.feedback_date, f.rating, f.comments
-FROM Feedback f
-INNER JOIN Customers c ON f.customer_id = c.customer_id;
+## Customer Feedback Analysis: Insights and Recommendations
 
--- Which customers have provided feedback, and which customers have not? Show all customers and their feedback if available.
+**Goal**  
+Evaluate customer feedback ratings to identify areas for improvement in service or product quality.
 
-SELECT c.first_name, c.last_name, f.feedback_date, f.rating, f.comments
-FROM Customers c
-LEFT JOIN Feedback f ON c.customer_id = f.customer_id;
+**Key Question**  
+What are the average customer ratings, and what specific feedback comments correlate with the lower ratings?
 
--- What is the average rating across all feedback?
+To find this out, I ran the following query:
 
-WITH AverageRating AS (
-    SELECT AVG(rating) AS avg_rating
-    FROM Feedback
-)
-SELECT avg_rating
-FROM AverageRating;
+```sql
+SELECT 
+    CONCAT(c.first_name, ' ', c.last_name) AS customer_name,
+    f.feedback_date,
+    f.rating,
+    f.comments
+FROM 
+    Customers c
+JOIN 
+    Feedback f ON c.customer_id = f.customer_id;
 
--- How many feedback entries are there for each rating level?
+In return, it revealed the following:
 
-WITH RatingCounts AS (
-  SELECT rating, COUNT(*) AS rating_count
-  FROM Feedback
-  GROUP BY rating
-)
-  SELECT rating_count
-  FROM RatingCounts;
+Results:
 
-# Customer Feedback Analysis - Business Benefits
+	•	Alice Brown:
+Feedback Date: 2023-06-01
+Rating: 5
+Comments: “Excellent Service!”
+	•	Bob Davis:
+Feedback Date: 2023-06-02
+Rating: 4
+Comments: “Very good, but could improve.”
+	•	Charlie Evans:
+Feedback Date: 2023-06-03
+Rating: 2
+Comments: “Not satisfied with the product quality.”
 
-## Objective:
-- Understand customer satisfaction and feedback patterns.
+Analysis
 
-## Business Problems Addressed:
-1. **Customer Satisfaction:**
-   - **Goal:** Determine overall customer satisfaction levels.
-   - **Benefit:** Provides insight into average satisfaction, helping identify areas for improvement.
+	•	Positive Feedback: Alice provided the highest rating (5) with positive comments, indicating satisfaction with the service quality.
+	•	Mixed Feedback: Bob rated the service a 4 and suggested improvements, indicating while he was satisfied, there are areas that need enhancement.
+	•	Negative Feedback: Charlie’s feedback is concerning, with a rating of 2 and dissatisfaction regarding product quality.
 
-2. **Feedback Trends:**
-   - **Goal:** Identify common feedback trends and rating distributions.
-   - **Benefit:** Reveals frequently mentioned issues or positive aspects, guiding product/service enhancements.
+To improve customer satisfaction by analyzing feedback to identify strengths and areas for improvement, here are my recommendations:
 
-3. **Customer Engagement:**
-   - **Goal:** Assess customer feedback participation and identify gaps.
-   - **Benefit:** Helps understand which customers are actively providing feedback and which are not, informing engagement strategies.
+	1.	Maintain High Standards of Service: Since Alice’s feedback highlights excellent service, it’s important to maintain and encourage these standards among staff to ensure continued customer satisfaction.
+	2.	Address Improvement Areas: For Bob’s feedback, gather more specific details on what aspects could be improved. This might involve surveys or follow-up communications to understand customer needs better.
+	3.	Investigate Product Quality Issues: Charlie’s negative feedback suggests that there may be significant quality issues with the products. Conduct an internal review of the product line to identify potential causes and implement quality control measures.
+	4.	Customer Follow-Up: Implement a system for following up with customers after their purchase to address any potential issues and gather additional feedback.
+	5.	Engage Customers with Promotions: Consider promotions or incentives for customers who leave feedback to encourage more participation and engagement.
 
-4. **Targeted Improvements:**
-   - **Goal:** Prioritize improvements based on feedback frequency and rating levels.
-   - **Benefit:** Focuses efforts on addressing issues highlighted by multiple customers, leading to more effective solutions.
-
-## Overall Impact:
-- **Informed Decision-Making:** Data-driven insights guide business decisions, improving customer experience and satisfaction.
-- **Strategic Planning:** Helps allocate resources effectively to areas with the most significant impact on customer satisfaction.
-- **Enhanced Customer Retention:** Addressing common issues and leveraging positive feedback can boost customer loyalty and retention.
-
+Note: This analysis is limited to the available data and will not be updated in the future.

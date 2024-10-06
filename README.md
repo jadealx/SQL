@@ -67,26 +67,37 @@ Performed SQL queries on the Superstore database to analyze item information and
 # Investment Analysis Project
 
 ## Overview
-- Conducted an in-depth analysis of investment data across multiple portfolios.
-- Utilized advanced SQL techniques including JOINs, CTEs, and aggregate functions.
+This project focuses on analyzing investment data across multiple portfolios to assess overall performance and identify trends in user demographics. I revamped this analysis to fine-tune my SQL skills and deepen my understanding of investment behavior.
 
-### Key Insights
-1. **Average Investment Value by Portfolio:**
-   - Calculated the average value of investments within each portfolio as of the most recent performance date.
-2. **Total Investment Value by Investor:**
-   - Aggregated the total value of investments per investor, providing insights into individual investment behaviors.
-3. **Investments with High Returns:**
-   - Identified investments yielding returns greater than 10% as of the latest performance date.
+## Key Insights
+1. **Total Investment by User:**
+   - Analyzed the total amount invested by each user, revealing significant differences in investment behaviors.
+   - Example Findings: 
+     - Alice invested a total of $225,000.
+     - Bob invested $50,000.
+     - Carol invested $8,000.
+   
+2. **Investment Trends by Age Group:**
+   - Assessed total investments across different age groups, identifying which demographics are more actively investing.
+   - Example Findings:
+     - Age group 30-39 invested a total of $233,000.
+     - Age group 40-49 invested $50,000.
 
-### SQL Techniques Used
-- **JOINS:** Linked data across `Investors`, `Portfolios`, `Investments`, and `Performance` tables.
-- **Common Table Expressions (CTEs):** Simplified complex queries by breaking them down into manageable parts.
-- **Subqueries:** Used subqueries to retrieve specific data points, such as the latest performance date for each investment.
-- **Aggregate Functions:** Employed functions like `AVG` and `SUM` to calculate average and total values.
-- **Filtering with LIKE and Wildcards (%):** Applied pattern matching to filter and analyze specific data entries.
+3. **Investment Trends by Risk Tolerance:**
+   - Evaluated total investments based on risk tolerance levels to understand risk preferences among users.
+   - Example Findings:
+     - High Risk Tolerance: $225,000.
+     - Medium Risk Tolerance: $50,000.
+     - Low Risk Tolerance: $8,000.
 
-### Business Application
-- This analysis provides valuable insights for investment managers to understand portfolio performance, identify high-performing investments, and evaluate investor behaviors. These insights can inform strategic investment decisions, optimize portfolio management, and enhance investor relations.
+## SQL Techniques Used
+- **JOINS:** Linked data across `Users`, `Portfolios`, and `Investments` tables.
+- **Aggregate Functions:** Utilized functions like `SUM` to calculate total investment values and analyze trends.
+- **CASE Statements:** Implemented CASE logic to categorize users by age groups.
+- **Filtering Techniques:** Applied filtering to analyze data based on demographics and investment behavior.
+
+## Business Application
+This analysis offers valuable insights for investment managers, allowing them to understand portfolio performance, identify high-performing investments, and evaluate investor behaviors. These insights can inform strategic investment decisions, optimize portfolio management, and enhance investor relations.
 
 # Grocery Store Rewards Program Analysis
 

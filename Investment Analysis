@@ -1,3 +1,5 @@
+<!-- As of October 6th, 2024, this project has been updated with key findings and recommendations. -->
+
 CREATE TABLE Users (
     user_id INTEGER PRIMARY KEY,
     name TEXT,
@@ -60,60 +62,89 @@ INSERT INTO Performance (performance_id, investment_id, date, value) VALUES
 (9, 5, '2023-01-01', 8500.00),
 (10, 5, '2023-06-01', 8700.00);
 
--- Find the total amount invested by each user.
+## Goal of the Analysis
+
+Assess the overall performance of investment portfolios by analyzing total investments, average portfolio values, and identifying high-performing investments, particularly in the stock category.
+
+## Total Investment Analysis
+
+I wanted to find out what is the total amount invested by each user? Are there any trends in investment amounts across different user demographics (e.g., age or risk tolerance)?
+
+To do this, I ran the following query:
+
+```sql
 SELECT u.name, SUM(i.amount_invested) AS total_invested
 FROM Users u
 JOIN Portfolios p ON u.user_id = p.user_id
 JOIN Investments i ON p.portfolio_id = i.portfolio_id
 GROUP BY u.user_id, u.name;
 
--- Find the average value of investments in each portfolio as of the most recent performance date.
-WITH LatestPerformance AS (
-    SELECT investment_id, MAX(date) AS latest_date
-    FROM Performance
-    GROUP BY investment_id
-)
-SELECT p.portfolio_name, AVG(perf.value) AS avg_investment_value
-FROM Portfolios p
-JOIN Investments i ON p.portfolio_id = i.portfolio_id
-JOIN Performance perf ON i.investment_id = perf.investment_id
-JOIN LatestPerformance lp ON perf.investment_id = lp.investment_id AND perf.date = lp.latest_date
-GROUP BY p.portfolio_name;
+This revealed the following:
 
--- Find users with investments in stocks worth more than $15,000 as of the most recent performance date.
-WITH LatestPerformance AS (
-    SELECT investment_id, MAX(date) AS latest_date
-    FROM Performance
-    GROUP BY investment_id
-)
-SELECT u.name, i.investment_name, perf.value AS current_value
+	•	Alice invested a total amount of $225,000
+	•	Bob invested $50,000
+	•	Carol invested $8,000
+
+I wanted to see the total amount invested by age group, so I then ran the following query:
+
+SELECT 
+    CASE 
+        WHEN age BETWEEN 30 AND 39 THEN '30-39'
+        WHEN age BETWEEN 40 AND 49 THEN '40-49'
+        ELSE 'Other'
+    END AS age_group,
+    SUM(i.amount_invested) AS total_invested
 FROM Users u
 JOIN Portfolios p ON u.user_id = p.user_id
 JOIN Investments i ON p.portfolio_id = i.portfolio_id
-JOIN Performance perf ON i.investment_id = perf.investment_id
-JOIN LatestPerformance lp ON perf.investment_id = lp.investment_id AND perf.date = lp.latest_date
-WHERE i.investment_type = 'Stock' AND perf.value > 15000;
+GROUP BY age_group;
 
-## Summary
+Which revealed:
 
-### Analysis Overview
-- Conducted an in-depth analysis of investment data across multiple portfolios.
-- Utilized advanced SQL techniques including JOINs, CTEs, and aggregate functions.
+	•	The age group 30-39 invested a total of $233,000
+	•	The age group 40-49 invested $50,000
 
-### Key Insights
-1. **Average Investment Value by Portfolio:**
-   - Calculated the average value of investments within each portfolio as of the most recent performance date.
-2. **Total Investment Value by Investor:**
-   - Aggregated the total value of investments per investor, providing insights into individual investment behaviors.
-3. **Investments with High Returns:**
-   - Identified investments yielding returns greater than 10% as of the latest performance date.
+I also wanted to see if there’s a trend based on risk tolerance, so I also ran this query:
 
-### SQL Techniques Used
-- **JOINS:** Linked data across `Investors`, `Portfolios`, `Investments`, and `Performance` tables.
-- **Common Table Expressions (CTEs):** Simplified complex queries by breaking them down into manageable parts.
-- **Subqueries:** Used subqueries to retrieve specific data points, such as the latest performance date for each investment.
-- **Aggregate Functions:** Employed functions like `AVG` and `SUM` to calculate average and total values.
-- **Filtering with LIKE and Wildcards (%):** Applied pattern matching to filter and analyze specific data entries.
+SELECT 
+    u.risk_tolerance,
+    SUM(i.amount_invested) AS total_invested
+FROM Users u
+JOIN Portfolios p ON u.user_id = p.user_id
+JOIN Investments i ON p.portfolio_id = i.portfolio_id
+GROUP BY u.risk_tolerance;
 
-### Business Application
-- This analysis provides valuable insights for investment managers to understand portfolio performance, identify high-performing investments, and evaluate investor behaviors. These insights can inform strategic investment decisions, optimize portfolio management, and enhance investor relations.
+Which revealed:
+
+	•	High Risk Tolerance: $225,000
+	•	Medium Risk Tolerance: $50,000
+	•	Low Risk Tolerance: $8,000
+
+Recommendations
+
+For High Risk Tolerance Investors, like Alice:
+
+	•	Encourage investment in high-growth stocks, technology companies, and possibly cryptocurrencies.
+	•	Suggest diversifying into international markets or sectors expected to experience significant growth.
+
+Portfolio Considerations
+
+	•	Consider creating portfolios that emphasize capital appreciation over income, which aligns with their high risk appetite.
+
+For Medium Risk Tolerance Investors, like Bob:
+
+	•	Recommend a balanced mix of stocks and bonds, focusing on stable dividend-paying stocks and moderate-risk mutual funds.
+	•	Include some exposure to high-risk assets for potential growth, but maintain a safety net through safer investments.
+
+Portfolio Considerations
+
+	•	Portfolio diversification should be a priority, ensuring they are not overly exposed to any single sector.
+
+For Low Risk Tolerance Investors, like Carol:
+
+	•	Recommend conservative investments such as government bonds, fixed deposits, or high-quality corporate bonds.
+	•	Focus on income-generating assets that provide stability rather than growth.
+
+Portfolio Considerations
+
+	•	Emphasize capital preservation and lower volatility, which aligns with their risk tolerance.

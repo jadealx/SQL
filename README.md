@@ -145,6 +145,26 @@ This project analyzes retail sales data to evaluate the effectiveness of product
 - **Promotional Effectiveness**: Assesses how different promotional campaigns impact customer spending behavior and redemption rates.
 - **Sales Analysis**: Analyzes total spending, unique customers, and total sales associated with various promotions.
 
+- ## Skills Used
+
+- **SQL**:
+  - **Joins**: Utilized INNER JOIN and other types to combine data from multiple tables and derive insights.
+  - **Aggregation Functions**: Used COUNT, SUM, and COUNT DISTINCT to summarize data and extract meaningful metrics.
+  - **Grouping**: Employed GROUP BY to aggregate data based on promotions and spending patterns.
+  - **Ordering**: Used ORDER BY to organize results for better readability.
+
+- **Database Design**:
+  - **Schema Creation**: Designed a relational database schema with tables such as Customers, Products, Sales, Feedback, and Promotions.
+  - **Foreign Key Constraints**: Established relationships between tables to maintain data integrity.
+
+- **Data Analysis**:
+  - **Promotion Analysis**: Evaluated the impact of promotions on customer spending behavior and engagement.
+  - **Sales Trends**: Analyzed sales data to identify trends related to promotional effectiveness.
+
+## How This Analysis Can Help Businesses
+
+This analysis provides actionable insights into how promotional campaigns influence customer spending patterns. By understanding these dynamics, businesses can optimize their promotional strategies, enhance customer engagement, and improve overall sales performance.
+
   # Retail Sales Analysis: Insights and Recommendations
 
 ## Overview
@@ -180,22 +200,4 @@ This project focuses on analyzing retail sales data to gain insights into custom
 
 This analysis provides valuable insights into customer behavior, product performance, and pricing strategies. By understanding these dynamics, businesses can optimize their marketing efforts, enhance product offerings, and make data-driven decisions to improve overall sales performance.- **Customer Insights**: Evaluates customer engagement with promotions based on spending patterns.
 
-## Skills Used
 
-- **SQL**:
-  - **Joins**: Utilized INNER JOIN and other types to combine data from multiple tables and derive insights.
-  - **Aggregation Functions**: Used COUNT, SUM, and COUNT DISTINCT to summarize data and extract meaningful metrics.
-  - **Grouping**: Employed GROUP BY to aggregate data based on promotions and spending patterns.
-  - **Ordering**: Used ORDER BY to organize results for better readability.
-
-- **Database Design**:
-  - **Schema Creation**: Designed a relational database schema with tables such as Customers, Products, Sales, Feedback, and Promotions.
-  - **Foreign Key Constraints**: Established relationships between tables to maintain data integrity.
-
-- **Data Analysis**:
-  - **Promotion Analysis**: Evaluated the impact of promotions on customer spending behavior and engagement.
-  - **Sales Trends**: Analyzed sales data to identify trends related to promotional effectiveness.
-
-## How This Analysis Can Help Businesses
-
-This analysis provides actionable insights into how promotional campaigns influence customer spending patterns. By understanding these dynamics, businesses can optimize their promotional strategies, enhance customer engagement, and improve overall sales performance.

@@ -23,7 +23,8 @@ This repository contains a collection of both personal and course projects showc
    - **Goal:** Analyzed retail sales data to evaluate product popularity and pricing strategies while providing recommendations for business improvement.  
    - **Techniques:** SQL joins, Customer Lifetime Value (CLV) analysis, grouping, and sales performance evaluation.  
    - **Key Learnings:** Gained experience in retail data analysis, product performance evaluation, and developing data-driven recommendations.
-  
+
+
    5. **Retail Product Launch & Promotion Effectiveness Analysis**  
    - **Goal:** Evaluated the impact of promotional campaigns on customer spending behavior and product launch success to optimize future marketing efforts.  
    - **Techniques:** SQL joins, aggregate functions, sales and promotions analysis, and customer feedback insights.  
